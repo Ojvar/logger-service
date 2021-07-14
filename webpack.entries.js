@@ -2,22 +2,22 @@ module.exports = {
     files: {
         /* Scripts */
         "scripts/pages/home/index": "./resources/scripts/pages/home/index.ts",
-        "scripts/pages/auth/login": "./resources/scripts/pages/auth/login.ts",
-        "scripts/pages/errors/500": "./resources/scripts/pages/errors/500.ts",
+        // "scripts/pages/auth/login": "./resources/scripts/pages/auth/login.ts",
+        // "scripts/pages/errors/500": "./resources/scripts/pages/errors/500.ts",
 
         /* Styles */
-        "styles/pages/errors/500": "./resources/styles/pages/errors/500.scss",
+        // "styles/pages/errors/500": "./resources/styles/pages/errors/500.scss",
         "styles/layout/base": "./resources/styles/layout/base.scss",
         "styles/layout/app": "./resources/styles/layout/app.scss",
-        "styles/components/global/logo":
-            "./resources/styles/components/global/logo.scss",
+        // "styles/components/global/logo":
+        //     "./resources/styles/components/global/logo.scss",
     },
 
     copy: [
-        {
-            from: "./resources/images/cancel.png",
-            to: "./images/cancel.[contenthash].png",
-        },
+        // {
+        //     from: "./resources/images/cancel.png",
+        //     to: "./images/cancel.[contenthash].png",
+        // },
     ],
 
     cacheGroups: {
@@ -45,6 +45,13 @@ module.exports = {
         axios: {
             test: /[\\/]node_modules[\\/]axios/i,
             name: "chunks/axios",
+            chunks: "all",
+            priority: 100,
+        },
+
+        socketIoClient: {
+            test: /[\\/]node_modules[\\/]socket.io-client/i,
+            name: "chunks/socket.io-client",
             chunks: "all",
             priority: 100,
         },
