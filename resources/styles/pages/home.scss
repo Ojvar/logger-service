@@ -1,0 +1,47 @@
+li.log {
+    &-info .title {
+        color: blue;
+    }
+
+    &-danger .title {
+        color: darkred;
+    }
+
+    &-warning .title {
+        color: orangered;
+    }
+
+    &-warning .silly {
+        color: black;
+    }
+}
+
+ul {
+    color: gray;
+    border: 1px solid gray;
+    border-width: 2px 0px 2px 0px;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+ul li {
+    border-bottom: 1px solid gray;
+    margin-bottom: 0.5em;
+}
+
+ul li:first-child {
+    font-size: larger;
+    background-color: cyan;
+    color: black;
+    font-weight: bolder;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+ul li:nth-child(odd) {
+    color: black;
+}
+
+ul li:last-child {
+    border: none;
+}

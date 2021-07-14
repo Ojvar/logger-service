@@ -3,15 +3,19 @@ extend ../../layout/app.pug
 block content
     .section
         h1 Event Viewer
+
+        button(@click.prevent="sendMessage") Send message
+
         .section
             h2 Recent Logs 
                 ul
-                    li(v-for="(log, index) in logs" :key="index")
-                        p.
-                            {{ index }} / {{ log.type }} / {{ log.tag }}
-                            {{ log.body }}
-        button(@click.prevent="sendMessage") Send message
+                    li(v-for="(log, index) in logs" :key="index" :class="`log-${log.type}`")
+                        div.title {{ index }} / {{ log.type }} / {{ log.tag }}
+                        div.body {{ log.body }}
 
+
+block styles
+    link(rel="stylesheet" href=Helper.mix("styles/pages/home.css"))
 
 block scripts
     script(defer, src=Helper.mix("chunks/socket.io-client.js")) 

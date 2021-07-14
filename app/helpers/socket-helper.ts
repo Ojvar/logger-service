@@ -23,10 +23,16 @@ export class SocketHelper {
         server.on("connection", (socket: Socket) => {
             this.logger.info("New Connection ", socket.id);
 
+            socket.on("connect", () => {
+                this.logger.info(`New client[${socket.id}] connected`);
+            });
+
+            socket.on("disconnect", () => {
+                this.logger.info(`Client[${socket.id}] disconnected`);
+            });
+
             /* Setup events */
             socket.on("log", (data: IncomingLogType) => {
-                this.logger.log("LOG", data);
-
                 /* Broadcast to all clients */
                 socket.broadcast.emit("log", data);
             });

@@ -52,16 +52,17 @@ export class HomePage {
                         type: "info",
                     } as IncomingLogType;
 
-                    Vue.set(this.logs, this.logs.length, logData);
+                    this.logs.unshift(logData);
                     this.socket?.emit("log", logData);
                 },
 
                 /**
                  * New incoming log
-                 * @param data {IncomfingLogType}
+                 * @param logData {IncomfingLogType}
                  */
-                newIncomingLog(data: IncomingLogType) {
-                    Vue.set(this.logs, this.logs.length, data);
+                newIncomingLog(logData: IncomingLogType) {
+                    this.logs.unshift(logData);
+                    // Vue.set(this.logs, this.logs.length, data);
                 },
 
                 /**

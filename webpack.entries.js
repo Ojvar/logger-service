@@ -6,7 +6,8 @@ module.exports = {
         // "scripts/pages/errors/500": "./resources/scripts/pages/errors/500.ts",
 
         /* Styles */
-        // "styles/pages/errors/500": "./resources/styles/pages/errors/500.scss",
+        "styles/pages/home": "./resources/styles/pages/home.scss",
+        "styles/pages/errors/500": "./resources/styles/pages/errors/500.scss",
         "styles/layout/base": "./resources/styles/layout/base.scss",
         "styles/layout/app": "./resources/styles/layout/app.scss",
         // "styles/components/global/logo":
