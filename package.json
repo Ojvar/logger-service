@@ -1,7 +1,7 @@
 {
-    "name": "@ojvar/sunset",
+    "name": "@ojvar/logger-service",
     "version": "5.0.1",
-    "description": "Sunset mini-framework",
+    "description": "Logger service",
     "main": "./dist/core/server.js",
     "scripts": {
         "clean": "rimraf ./dist",
@@ -21,14 +21,16 @@
     "keywords": [
         "sunset",
         "framework",
-        "mini-framework"
+        "mini-framework",
+        "logger",
+        "online"
     ],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Ojvar/SunSet-5/issues"
+        "url": "https://github.com/Ojvar/logger-service/issues"
     },
-    "homepage": "https://github.com/Ojvar/SunSet-5#readme",
+    "homepage": "https://github.com/Ojvar/logger-service#readme",
     "devDependencies": {
         "@babel/core": "^7.12.13",
         "@types/body-parser": "^1.19.0",

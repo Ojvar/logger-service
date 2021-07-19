@@ -2,7 +2,7 @@ extend ../../layout/app.pug
 
 block content
     .section
-        h1 Event Viewer
+        h1 Log Monitor
 
         button(@click.prevent="sendMessage") Send message
 
@@ -15,8 +15,8 @@ block content
 
 
 block styles
-    link(rel="stylesheet" href=Helper.mix("styles/pages/home.css"))
+    link(rel="stylesheet" href=Helper.mix("styles/pages/monitor.css"))
 
 block scripts
     script(defer, src=Helper.mix("chunks/socket.io-client.js")) 
-    script(defer, src=Helper.mix("scripts/pages/home/index.js")) 
+    script(defer, src=Helper.mix("scripts/pages/monitor/index.js")) 

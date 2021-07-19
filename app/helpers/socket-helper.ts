@@ -7,8 +7,19 @@ import { Server, Socket } from "socket.io";
  * Socket helper
  */
 export class SocketHelper {
+    /* Internal variables */
     private logger: LoggerType = GlobalData.logger;
-    private io?: Server;
+    private _io?: Server;
+
+    /* Constants */
+    public readonly C_LOG_MESSAGE: string = "log";
+
+    /**
+     * Get server instance
+     */
+    public get io(): Server {
+        return this._io as Server;
+    }
 
     /**
      * Start web-socket server
@@ -16,7 +27,7 @@ export class SocketHelper {
      */
     public async start(options: SocketServerConfig) {
         const server: Server = new Server(GlobalData.Express.app.Server);
-        this.io = server;
+        this._io = server;
 
         this.logger.info("Socket.IO server started successfully");
 
@@ -32,10 +43,25 @@ export class SocketHelper {
             });
 
             /* Setup events */
-            socket.on("log", (data: IncomingLogType) => {
+            socket.on(this.C_LOG_MESSAGE, (data: IncomingLogType) => {
                 /* Broadcast to all clients */
-                socket.broadcast.emit("log", data);
+                socket.broadcast.emit(this.C_LOG_MESSAGE, data);
             });
         });
     }
+
+    /**
+     * Broadcast a data (Emit a data)
+     * @param emitType {string}
+     * @param message {object | string}
+     * @returns {boolean}
+     */
+    public broadcast(emitType: EmitType, message: object | string): boolean {
+        return this.io.emit(emitType, message);
+    }
 }
+
+/**
+ * Emit types
+ */
+export type EmitType = "log";
