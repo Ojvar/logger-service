@@ -1,4 +1,5 @@
 import { GlobalHelper } from "@APP/helpers/GlobalHelper";
+import { LogRequestType } from "@APP/validators/log/log-validator";
 import { NextFunction, Request, Response } from "express";
 
 /**
@@ -12,9 +13,28 @@ export class LogController {
      * @param next {NextFunction}
      */
     public async info(req: Request, res: Response, next: NextFunction) {
+        const userData: LogRequestType = req.payload;
         const result: boolean = GlobalHelper.logHelper.log({
-            ...req.body,
+            ...userData,
             type: "info",
+        });
+
+        res.status(200)
+            .send(result)
+            .end();
+    }
+
+    /**
+     * Insert a debug log
+     * @param req {Request}
+     * @param res {Response}
+     * @param next {NextFunction}
+     */
+     public async debug(req: Request, res: Response, next: NextFunction) {
+        const userData: LogRequestType = req.payload;
+        const result: boolean = GlobalHelper.logHelper.log({
+            ...userData,
+            type: "debug",
         });
 
         res.status(200)
@@ -29,8 +49,9 @@ export class LogController {
      * @param next {NextFunction}
      */
     public async warning(req: Request, res: Response, next: NextFunction) {
+        const userData: LogRequestType = req.payload;
         const result: boolean = GlobalHelper.logHelper.log({
-            ...req.body,
+            ...userData,
             type: "warning",
         });
 
@@ -40,15 +61,16 @@ export class LogController {
     }
 
     /**
-     * Insert a danger log
+     * Insert a error log
      * @param req {Request}
      * @param res {Response}
      * @param next {NextFunction}
      */
-    public async danger(req: Request, res: Response, next: NextFunction) {
+    public async error(req: Request, res: Response, next: NextFunction) {
+        const userData: LogRequestType = req.payload;
         const result: boolean = GlobalHelper.logHelper.log({
-            ...req.body,
-            type: "danger",
+            ...userData,
+            type: "error",
         });
 
         res.status(200)
@@ -63,26 +85,10 @@ export class LogController {
      * @param next {NextFunction}
      */
     public async silly(req: Request, res: Response, next: NextFunction) {
+        const userData: LogRequestType = req.payload;
         const result: boolean = GlobalHelper.logHelper.log({
-            ...req.body,
+            ...userData,
             type: "silly",
-        });
-
-        res.status(200)
-            .send(result)
-            .end();
-    }
-
-    /**
-     * Insert a debug log
-     * @param req {Request}
-     * @param res {Response}
-     * @param next {NextFunction}
-     */
-    public async debug(req: Request, res: Response, next: NextFunction) {
-        const result: boolean = GlobalHelper.logHelper.log({
-            ...req.body,
-            type: "debug",
         });
 
         res.status(200)

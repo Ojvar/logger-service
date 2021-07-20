@@ -18,39 +18,4 @@ html(lang="en")
         block scripts
     body 
         #app
-            nav.navbar(role='navigation' aria-label='main navigation')
-                .navbar-brand
-                    a.navbar-item(href=Helper.url("home.index"))
-                        //- img(src='https://bulma.io/images/bulma-logo.png' width='112' height='28')
-                        | SUNSET
-                    a.navbar-burger(role='button' aria-label='menu' aria-expanded='false' data-target='mainNavbar')
-                        span(aria-hidden='true')
-                        span(aria-hidden='true')
-                        span(aria-hidden='true')
-
-                #mainNavbar.navbar-menu
-                    .navbar-start
-                        a(href=Helper.url("home.index")).navbar-item
-                            | Home
-                        .navbar-item.has-dropdown.is-hoverable
-                            a.navbar-link
-                                | More
-                            .navbar-dropdown
-                                a(href=Helper.url("home.about")).navbar-item
-                                    | About
-                                a(href=Helper.url("home.reposrt-issue")).navbar-item
-                                    | Report an issue
-                                hr.navbar-divider
-                                a(href=Helper.url("home.private-page")).navbar-item
-                                    | PRIVATE PAGE
-                    .navbar-end
-                        .navbar-item
-                            .buttons
-                                if (! user)
-                                    a.button.is-primary(href=Helper.url("auth.login"))
-                                        strong Login
-                                else
-                                    a.button.is-light(href=Helper.url("auth.logout"))
-                                        | Log out
-
             block content
