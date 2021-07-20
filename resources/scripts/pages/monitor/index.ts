@@ -34,6 +34,20 @@ export class HomePage {
                     socket: Socket | null;
                 }),
 
+                computed: {
+                    /**
+                     * Returns filtered logs
+                     * @returns {IncomingLogType[]}
+                     */
+                    filteredLogs(): IncomingLogType[] {
+                        const filter:string = this.filter.toLowerCase();
+
+                        return this.logs.filter((item:IncomingLogType ) => 
+                                            -1 < item.tag.toLowerCase().indexOf(filter) || 
+                                            -1 < item.type.toLowerCase().indexOf(filter))
+                    }
+                },
+
             /**
              * Initialization
              */
@@ -63,6 +77,13 @@ export class HomePage {
                 newIncomingLog(logData: IncomingLogType) {
                     this.logs.unshift(logData);
                     // Vue.set(this.logs, this.logs.length, data);
+                },
+
+                /**
+                 * Clear logs
+                 */
+                clearLogs() {
+                    Vue.set(this, "logs", []);
                 },
 
                 /**
