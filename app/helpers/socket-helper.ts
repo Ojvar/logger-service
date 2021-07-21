@@ -2,6 +2,7 @@ import { SocketServerConfig } from "@CONFIGS/backend/socket";
 import { GlobalData, LoggerType } from "@CORE/helpers/global-data-helper";
 import { IncomingLogType } from "@TYPES/backend/socket-data-types";
 import { Server, Socket } from "socket.io";
+import { GlobalHelper } from "./GlobalHelper";
 
 /**
  * Socket helper
@@ -44,7 +45,10 @@ export class SocketHelper {
 
             /* Setup events */
             socket.on(this.C_LOG_MESSAGE, (data: IncomingLogType) => {
-                /* Broadcast to all clients */
+                /* Save log data */
+                GlobalHelper.logHelper.log(data, false);
+
+                /* Broadcast to the other clients */
                 socket.broadcast.emit(this.C_LOG_MESSAGE, data);
             });
         });

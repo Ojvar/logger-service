@@ -5,6 +5,7 @@ block content
         h1.is-1.title Log Monitor
 
     .section
+        input#serverUrlInput(type="hidden" value=url)
         button(@click.prevent="clearLogs") Clear Logs
 
         .section

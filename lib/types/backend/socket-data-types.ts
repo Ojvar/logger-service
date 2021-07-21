@@ -1,10 +1,4 @@
-export type LogType =
-    | "info"
-    | "error"
-    | "danger"
-    | "silly"
-    | "info"
-    | "warning";
+export type LogType = "info" | "debug" | "error" | "warning" | "silly";
 
 /**
  * Incoming log type

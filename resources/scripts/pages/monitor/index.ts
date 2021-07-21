@@ -7,10 +7,16 @@ import { io, Socket } from "socket.io-client";
  * HomePage class
  */
 export class HomePage {
+    public serverUrl: string = "";
+
     /**
      * Ctr
      */
     constructor() {
+        this.serverUrl = (document.querySelector(
+            "#serverUrlInput"
+        ) as HTMLInputElement).value;
+
         this.initVue();
     }
 
@@ -18,6 +24,8 @@ export class HomePage {
      * Init Vue
      */
     private initVue() {
+        const base: HomePage = this;
+
         new Vue({
             el: "#app",
 
@@ -34,25 +42,27 @@ export class HomePage {
                     socket: Socket | null;
                 }),
 
-                computed: {
-                    /**
-                     * Returns filtered logs
-                     * @returns {IncomingLogType[]}
-                     */
-                    filteredLogs(): IncomingLogType[] {
-                        const filter:string = this.filter.toLowerCase();
+            computed: {
+                /**
+                 * Returns filtered logs
+                 * @returns {IncomingLogType[]}
+                 */
+                filteredLogs(): IncomingLogType[] {
+                    const filter: string = this.filter.toLowerCase();
 
-                        return this.logs.filter((item:IncomingLogType ) => 
-                                            -1 < item.tag.toLowerCase().indexOf(filter) || 
-                                            -1 < item.type.toLowerCase().indexOf(filter))
-                    }
+                    return this.logs.filter(
+                        (item: IncomingLogType) =>
+                            -1 < item.tag.toLowerCase().indexOf(filter) ||
+                            -1 < item.type.toLowerCase().indexOf(filter)
+                    );
                 },
+            },
 
             /**
              * Initialization
              */
             created() {
-                this.connectToServer();
+                this.connectToServer(base.serverUrl);
             },
 
             methods: {
@@ -76,7 +86,6 @@ export class HomePage {
                  */
                 newIncomingLog(logData: IncomingLogType) {
                     this.logs.unshift(logData);
-                    // Vue.set(this.logs, this.logs.length, data);
                 },
 
                 /**
@@ -89,8 +98,10 @@ export class HomePage {
                 /**
                  * Connect to socket-server
                  */
-                connectToServer() {
-                    const socket: Socket = io();
+                connectToServer(url: string) {
+                    console.log("Socket Server Url:", url);
+
+                    const socket: Socket = io(url);
                     Vue.set(this, "socket", socket);
 
                     socket.on("log", (data: IncomingLogType) => {

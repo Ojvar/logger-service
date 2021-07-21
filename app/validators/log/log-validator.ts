@@ -1,15 +1,16 @@
 import {
     BaseValidatorInterface,
     validate,
-    ValidatorMiddlewareResultType
+    ValidatorMiddlewareResultType,
 } from "@APP/validators/base-validator";
 import {
     MaxRule,
     MinRule,
     RequiredRule,
-    StringRule
+    StringRule,
 } from "@APP/validators/validation-rules";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
+import { IncomingLogType } from "@TYPES/backend/socket-data-types";
 import { Request } from "express";
 import { Rules } from "validatorjs";
 
@@ -36,9 +37,7 @@ export class LogValidator extends BaseValidatorInterface {
         asyncCall: boolean = false
     ): ActionResultType | Promise<ActionResultType> {
         try {
-            const userData: LogRequestType = JSON.parse(
-                JSON.stringify(data)
-            );
+            const userData: LogRequestType = JSON.parse(JSON.stringify(data));
 
             return super.validateData<LogRequestType>(this, userData);
         } catch (err) {
@@ -67,8 +66,6 @@ export class LogValidator extends BaseValidatorInterface {
 /**
  * LogRequest Type
  */
-export type LogRequestType = {
-    body: string;
-    tag: string;
+export type LogRequestType = IncomingLogType & {
     type?: string;
-}
+};
